@@ -1,1 +1,8 @@
 theme: jekyll-theme-cayman
+title: NClient
+description: NClient is an HTTP client that allows you to call web service API methods through annotated controllers or interfaces.
+
+github:
+  repository_url: https://github.com/nclient/NClient
+  zip_url: https://github.com/nclient/NClient/releases
+  another_url: https://www.nuget.org/packages/NClient/
