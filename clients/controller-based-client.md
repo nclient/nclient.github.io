@@ -54,28 +54,28 @@ public void Post([FromBody] WeatherForecast forecast) { ... }
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Non standard types in route template:
+#### Non primitive types in route template:
 ```ruby
 [HttpPost("weather/{forecast}")]
 public void PostAsync(WeatherForecast forecast) { ... }
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Non standard types in headers:
+#### Non primitive types in headers:
 ```ruby
 [HttpPost]
 public void Post([FromHeader] WeatherForecast forecast) { ... }
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Dictionaries of non standard types in query:
+#### Dictionaries of non primitive types in query:
 ```ruby
 [HttpGet]
 public void Get([FromQuery] Dictionary<int, WeatherForecast> forecasts) { ... }
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Arrays of non standard types in query:
+#### Arrays of non primitive types in query:
 ```ruby
 [HttpGet]
 public void Get([FromQuery] WeatherForecast[] forecasts) { ... }
