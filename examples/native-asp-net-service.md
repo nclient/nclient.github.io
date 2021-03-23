@@ -5,7 +5,7 @@
 If you want to generate a client for a ASP.NET web service, then you don't even have to add attributes to the service interface. Everything you need:
 
 #### Step 1: Create controller
-```C#
+```ruby
 [ApiController, Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
@@ -16,7 +16,7 @@ public class WeatherForecastController : ControllerBase
 ```
 
 #### Step 2: Extract interface for your controller and add `INClient` interface
-```C#
+```ruby
 public interface IWeatherForecastClient : INClient
 {
     Task<WeatherForecast> GetAsync(DateTime date);
@@ -27,7 +27,7 @@ public class WeatherForecastController : ControllerBase, IWeatherForecastClient 
 ```
 
 #### Step 3: Create client
-```C#
+```ruby
 IWeatherForecastClient client = new AspNetClientProvider()
     .Use<IWeatherForecastClient, WeatherForecastController>(host: new Uri("http://localhost:8080"))
     .SetDefaultHttpClientProvider()
@@ -36,7 +36,7 @@ IWeatherForecastClient client = new AspNetClientProvider()
 ```
 
 #### Step 4: Send an http request
-```C#
+```ruby
 // Equivalent to the following request: 
 // curl -X GET -H "Content-type: application/json" http://localhost:8080/WeatherForecast?date=2021-03-13T00:15Z
 var forecast = await client.GetAsync(DateTime.Now);
