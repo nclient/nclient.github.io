@@ -3,17 +3,16 @@ NClient can work both synchronously and asynchronously. To execute a request to 
 you should specify the returned type as `Task` or `Task<>`:
 
 ```ruby
-[Api]
 public interface IProductServiceClient : INClient
 {
-    [AsHttpGet]
+    [GetMethod]
     Product Get(int id);             // sync call
-    [AsHttpGet]
+    [GetMethod]
     Task<Product> GetAsync(int id);  // async call
 
-    [AsHttpPost]
+    [PostMethod]
     void Post(Product product);      // sync call
-    [AsHttpPost]
+    [PostMethod]
     Task PostAsync(Product product); // async call
 }
 ```
