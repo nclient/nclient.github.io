@@ -2,10 +2,9 @@
 Sometimes it is necessary to get a full http response from a web service. In this case, you can use the standard NClient methods:
 
 ```ruby
-[Api]
 public interface IProductServiceClient : INClient
 {
-    [AsHttpGet]
+    [GetMethod]
     Task<Product> GetAsync(int id);
 }
 

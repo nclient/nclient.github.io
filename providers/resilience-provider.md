@@ -5,7 +5,10 @@ If you want to use another one - implement your own `IResilienceProvider` and pa
 ```ruby
 public class MyResilienceProvider : IResilienceProvider
 {
-    ...
+    public IResiliencePolicy Create()
+    {
+        ...
+    }
 }
 
 MyResilienceProvider resilienceProvider = new MyResilienceProvider ();

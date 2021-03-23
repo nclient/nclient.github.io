@@ -1,13 +1,13 @@
 # Interface-based client
-NClient allows you to create clients not only for ASP.NET, but also non ASP.NET services. 
-To do this, you need to create an interface and additionally declare it with attributes from `NClient.InterfaceProxy.Attributes`:
+NClient allows you to create clients not only for ASP.NET, but also any services. 
+To do this, you need to create an interface and additionally declare it with attributes from `NClient.Core.Attributes`:
 
 ```ruby
-[Api(template: "api")]
+[Path("api")]
 public interface IProductServiceClient : INClient
 {
-    [AsHttpPost(template: "products")]
-    Task PostAsync([ToBody] Product product);
+    [PostMethod("products")]
+    Task PostAsync([BodyParam] Product product);
 }
 ```
 
@@ -15,8 +15,8 @@ public interface IProductServiceClient : INClient
 
 Now that you have an interface for the client, you can create a client:
 ```ruby
-IProductServiceClient client = new AspNetClientProvider()
-    .Use<IProductServiceClient >(host: new Uri("http://localhost:8080"))
+IProductServiceClient client = new ClientProvider()
+    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
     .SetDefaultHttpClientProvider()
     .WithoutResiliencePolicy()
     .Build();
@@ -27,56 +27,56 @@ They are very similar to attributes for ASP.NET controllers. Below there is a ta
 
 | NClient.InterfaceProxy.Attributes | Microsoft.AspNetCore.Mvc |
 |:----------------------------------|:-------------------------|
-| ApiAttribute | ApiControllerAttribute + RouteAttribute |
-| AsHttpGetAttribute | HttpGetAttribute |
-| AsHttpPostAttribute | HttpPostAttribute |
-| AsHttpPutAttribute | HttpPutAttribute |
-| AsHttpDeleteAttribute | HttpDeleteAttribute |
-| ToQueryAttribute | FromQueryAttribute |
-| ToBodyAttribute | FromBodyAttribute |
-| ToRouteAttribute | FromRouteAttribute |
-| ToHeaderAttribute | FromHeaderAttribute |
+| PathAttribute | RouteAttribute |
+| GetMethodAttribute | HttpGetAttribute |
+| PostMethodAttribute | HttpPostAttribute |
+| PutMethodAttribute | HttpPutAttribute |
+| DeleteMethodAttribute | HttpDeleteAttribute |
+| QueryParamAttribute | FromQueryAttribute |
+| BodyParamAttribute | FromBodyAttribute |
+| RouteParamAttribute | FromRouteAttribute |
+| HeaderParamAttribute | FromHeaderAttribute |
 
 ### Limitations
 NClient attributes have some limitations:
 
 #### Multiple attributes:
 ```ruby
-[AsHttpGet("weather"), AsHttpGet("weather/{date}")] // => NotSupportedNClientException
+[GetMethod("weather"), GetMethod("weather/{date}")] // => NotSupportedNClientException
 WeatherForecast GetAsync(DateTime date);
 ```
 
 #### Multiple body parameters:
 ```ruby
-[AsHttpPost]
-void Post([ToBody] WeatherForecast forecast, [ToBody] DateTime date);
+[PostMethod]
+void Post([BodyParam] WeatherForecast forecast, [BodyParam] DateTime date);
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Non standard types in route template:
+#### Non primitive types in route template:
 ```ruby
-[AsHttpPost("weather/{forecast}")]
-void PostAsync([ToBody] WeatherForecast forecast);
+[PostMethod("weather/{forecast}")]
+void PostAsync([BodyParam] WeatherForecast forecast);
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Non standard types in headers:
+#### Non primitive types in headers:
 ```ruby
-[AsHttpPost]
-void Post([ToHeader] WeatherForecast forecast);
+[PostMethod]
+void Post([HeaderParam] WeatherForecast forecast);
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Dictionaries of non standard types in query:
+#### Dictionaries of non primitive types in query:
 ```ruby
-[AsHttpGet]
-void Get([ToQuery] Dictionary<int, WeatherForecast> forecasts);
+[GetMethod]
+void Get([QueryParam] Dictionary<int, WeatherForecast> forecasts);
 ```
 Exception `NotSupportedNClientException` will be thrown.
 
-#### Arrays of non standard types in query:
+#### Arrays of non primitive types in query:
 ```ruby
-[AsHttpGet]
-void Get([ToQuery] WeatherForecast[] forecasts);
+[GetMethod]
+void Get([QueryParam] WeatherForecast[] forecasts);
 ```
 Exception `NotSupportedNClientException` will be thrown.

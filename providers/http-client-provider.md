@@ -5,7 +5,10 @@ If you want to use another one - implement your own `IHttpClientProvider` and pa
 ```ruby
 public class MyHttpClientProvider : IHttpClientProvider
 {
-    ...
+    public IHttpClient Create()
+    {
+        ...
+    }
 }
 
 MyHttpClientProvider httpClientProvider = new MyHttpClientProvider();
