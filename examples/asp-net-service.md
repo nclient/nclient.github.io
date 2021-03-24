@@ -25,7 +25,7 @@ public class WeatherForecastController : ControllerBase, IWeatherForecastControl
 ```
 The annotation in the interface instead of the controller allows you to put the interface in a separate assembly. 
 Therefore, the client that will use this interface will not depend on the service.
-If you want to use native attributes, see [Client for native ASP.NET service](././native-asp-net-service).  
+If you want to use native attributes, see [Client for native ASP.NET service](native-asp-net-service).  
 
 #### Step 3 (optional): Create interface for client
 ```ruby

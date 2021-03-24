@@ -1,6 +1,6 @@
 # Client for native ASP.NET service
 > Note that you will have strong cohesion between the client and the service if you use the controller to create the client. 
-> To avoid this, use the interface as in [this example](././asp-net-service).
+> To avoid this, use the interface as in [this example](asp-net-service).
 
 If you want to generate a client for a ASP.NET web service, then you don't even have to add attributes to the service interface. Everything you need:
 
