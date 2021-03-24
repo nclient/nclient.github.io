@@ -28,7 +28,7 @@ public class WeatherForecastController : ControllerBase, IWeatherForecastClient 
 
 #### Step 3: Create client
 ```ruby
-IWeatherForecastClient client = new AspNetClientProvider()
+IWeatherForecastClient client = new ControllerClientProvider()
     .Use<IWeatherForecastClient, WeatherForecastController>(host: new Uri("http://localhost:8080"))
     .SetDefaultHttpClientProvider()
     .WithoutResiliencePolicy()
