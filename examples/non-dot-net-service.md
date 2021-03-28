@@ -7,7 +7,7 @@ dotnet add package NClient
 ```
 
 #### Step 2: Create interface for your service
-```C#
+```ruby
 [Path("api")]
 public interface IProductServiceClient : INClient
 {
@@ -17,14 +17,14 @@ public interface IProductServiceClient : INClient
 ```
 
 #### Step 3: Create client
-```C#
+```ruby
 IProductServiceClient client = NClientProvider
     .Use<IProductServiceClient>(host: "http://localhost:8080")
     .Build();
 ```
 
 #### Step 4: Send an http request
-```C#
+```ruby
 // Equivalent to the following request: 
 // curl -X POST -H "Content-type: application/json" --data "{ id: 1 }" http://localhost:8080/api/products
 await client.PostAsync(new Product(id: 1));
