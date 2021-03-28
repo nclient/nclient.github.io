@@ -9,7 +9,6 @@ IAsyncPolicy policy = Policy
 
 IProductServiceClient client = new ClientProvider()
     .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
     .WithResiliencePolicy(policy)
     .Build();
 ```
