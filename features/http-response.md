@@ -10,10 +10,8 @@ public interface IProductServiceClient : INClient
 
 ...
 
-IProductServiceClient client = new ClientProvider()
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy()
+IProductServiceClient client = NClientProvider
+    .Use<IProductServiceClient>(host: "http://localhost:8080")
     .Build();
 
 HttpResponse<Product> response = await client.AsHttp()

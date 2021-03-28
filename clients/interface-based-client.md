@@ -1,6 +1,6 @@
 # Interface-based client
 NClient allows you to create clients not only for ASP.NET, but also any services. 
-To do this, you need to create an interface and additionally declare it with attributes from `NClient.Core.Attributes`:
+To do this, you need to create an interface and additionally declare it with attributes from `NClient.Annotations`:
 
 ```ruby
 [Path("api")]
@@ -15,14 +15,12 @@ public interface IProductServiceClient : INClient
 
 Now that you have an interface for the client, you can create a client:
 ```ruby
-IProductServiceClient client = new ClientProvider()
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy()
+IProductServiceClient client = NClientProvider
+    .Use<IProductServiceClient>(host: "http://localhost:8080")
     .Build();
 ```
 
-### NClient.InterfaceProxy.Attributes
+### NClient.Annotations
 They are very similar to attributes for ASP.NET controllers. Below there is a table with the existing attributes and their equivalents in ASP.NET.
 
 | NClient.InterfaceProxy.Attributes | Microsoft.AspNetCore.Mvc |

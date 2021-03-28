@@ -16,17 +16,15 @@ public class WeatherForecastController : ControllerBase
     public async Task<WeatherForecast> GetAsync(DateTime date) =>
         new WeatherForecast(date: date, temperatureC: -25);
 }
-```
+``` 
 
-> !!! Please note that the interface must inherit from `INClient` interface.  
- 
+> If you add `INClient` interface, you will get additional NClient features: receive a full http response and change a resilience policy for requests (see [features](/features/index.md)).
+
 Now that you have a controller and an interface for the client, you can create a client:
 
 ```ruby
-IWeatherForecastClient client = new ControllerClientProvider()
-    .Use<IWeatherForecastClient, WeatherForecastController>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy()
+IWeatherForecastClient client = NClientProvider
+    .Use<IWeatherForecastClient, WeatherForecastController>(host: "http://localhost:8080")
     .Build();
 ```
 

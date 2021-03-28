@@ -6,10 +6,8 @@ but you can use any implementation of `Microsoft.Extensions.Logging.ILogger<TCat
 ```ruby
 ILogger<IProductServiceClient> logger = ...;
 
-IProductServiceClient client = new ClientProvider()
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy(policy)
-    .WithLogger(logger)
+IProductServiceClient client = NClientProvider
+    .Use<IProductServiceClient>(host: "http://localhost:8080")
+    .WithLogging(logger)
     .Build();
 ```
