@@ -13,9 +13,8 @@ public class MyHttpClientProvider : IHttpClientProvider
 
 MyHttpClientProvider httpClientProvider = new MyHttpClientProvider();
 
-IProductServiceClient client = new ClientProvider()
+IProductServiceClient client = NClientProvider
     .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
     .SetHttpClientProvider(httpClientProvider)
-    .WithoutResiliencePolicy()
     .Build();
 ```
