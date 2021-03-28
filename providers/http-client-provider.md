@@ -14,7 +14,6 @@ public class MyHttpClientProvider : IHttpClientProvider
 MyHttpClientProvider httpClientProvider = new MyHttpClientProvider();
 
 IProductServiceClient client = NClientProvider
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetHttpClientProvider(httpClientProvider)
+    .Use<IProductServiceClient>(host: "http://localhost:8080", httpClientProvider)
     .Build();
 ```
