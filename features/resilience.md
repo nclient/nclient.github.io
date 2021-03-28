@@ -7,8 +7,8 @@ IAsyncPolicy policy = Policy
     .Handle<Exception>()
     .WaitAndRetryAsync(maxRetryAttempts: 3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
-IProductServiceClient client = new ClientProvider()
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
+IProductServiceClient client = NClientProvider
+    .Use<IProductServiceClient>(host: "http://localhost:8080")
     .WithResiliencePolicy(policy)
     .Build();
 ```
