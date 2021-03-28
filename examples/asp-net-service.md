@@ -5,7 +5,7 @@ If you want to generate a client for a ASP.NET web service, then you need to ext
 dotnet add package NClient.AspNetCore
 ```
 #### Step 2: Create controller
-```C#
+```ruby
 public class WeatherForecastController : ControllerBase
 {
     public async Task<WeatherForecast> GetAsync(DateTime date) =>
@@ -14,7 +14,7 @@ public class WeatherForecastController : ControllerBase
 ```
 Note that you don't need to annotate it with ASP.NET attributes.
 #### Step 3: Extract interface for your controller
-```C#
+```ruby
 [Path("[controller]")]                                            // equivalent to [ApiController, Route("[controller]")]
 public interface IWeatherForecastController
 {
@@ -27,7 +27,7 @@ public class WeatherForecastController : ControllerBase, IWeatherForecastControl
 The annotation in the interface instead of the controller allows you to put the interface in a separate assembly. 
 Therefore, the client that will use this interface will not depend on the service.
 #### Step 4 (optional): Create interface for client
-```C#
+```ruby
 public interface IWeatherForecastClient : IWeatherForecastController, INClient
 {
 }
@@ -43,7 +43,7 @@ public class WeatherForecastController : ControllerBase, IWeatherForecastControl
 ```
 This should be done if you want your client type to not contain "Сontroller" in the name. If you add `INClient` interface, you will get additional NClient features: receive a full http response and change a resilience policy for requests.
 #### Step 6: Add controller to ServiceCollection in Startup.cs
-```C#
+```ruby
 public void ConfigureServices(IServiceCollection services)
 {
     // ...
@@ -56,14 +56,14 @@ public void ConfigureServices(IServiceCollection services)
 dotnet add package NClient
 ```
 #### Step 8: Create client
-```C#
+```ruby
 IWeatherForecastController client = NClientProvider
     .Use<IWeatherForecastController>(host: "http://localhost:8080")
     .Build();
 ```
 If you decide to follow the 4 step, use `IWeatherForecastClient` interface instead of `IWeatherForecastController`.
 #### Step 9: Send an http request
-```C#
+```ruby
 // Equivalent to the following request: 
 // curl -X GET -H "Content-type: application/json" http://localhost:8080/WeatherForecast?date=2021-03-13T00:15Z
 var forecast = await client.GetAsync(DateTime.Now);
