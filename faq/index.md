@@ -19,8 +19,7 @@ To enable logging, you should pass the `ILogger<>` instance to `ClientProvider` 
 For more information, see [here](/features/logging.md).
 
 ## How do I add the client to IServiceCollection?
-In NClient packages `NClient.AspNetProxy.*` already has the necessary extension methods for adding clients (method `AddNClient`). 
-If you use `NClient.InterfaceProxy.*` packages, then you need to install `NClient.Extensions.DependencyInjection`.
+You need to install `NClient.Extensions.DependencyInjection`, after that, the `AddNClient`extension method will be available to you.
 
 ## How do I get a full response from the service?
 Use methods of `IHttpNClient` interface. For more information, see [here](/features/http-response.md).
@@ -33,7 +32,7 @@ To do this, you should write your implementation of `IHttpClientProvider`.
 For more information, see [here](/providers/http-client-provider.md).
 
 ## How do I make sure that the interface for the client is annotated correctly?
-The client is validated when its instance is created using `ClientProvider`. If the interface is incorrect, an exception will be thrown.
+The client is validated when its instance is created using `NClientProvider`. If the interface is incorrect, an exception will be thrown.
 
 ## Is the client thread-safe?
 Yes, client instances are thread-safe.
