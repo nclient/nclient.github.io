@@ -12,8 +12,6 @@ public interface IProductServiceClient : INClient
 
 IProductServiceClient client = new ClientProvider()
     .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy()
     .Build();
 
 HttpResponse<Product> response = await client.AsHttp()
