@@ -13,9 +13,8 @@ public class MyResilienceProvider : IResilienceProvider
 
 MyResilienceProvider resilienceProvider = new MyResilienceProvider ();
 
-IProductServiceClient client = new ClientProvider()
+IProductServiceClient client = NClientProvider
     .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
     .WithResiliencePolicy(resilienceProvider)
     .Build();
 ```
