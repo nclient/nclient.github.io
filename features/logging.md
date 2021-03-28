@@ -7,9 +7,7 @@ but you can use any implementation of `Microsoft.Extensions.Logging.ILogger<TCat
 ILogger<IProductServiceClient> logger = ...;
 
 IProductServiceClient client = new ClientProvider()
-    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080"))
-    .SetDefaultHttpClientProvider()
-    .WithoutResiliencePolicy(policy)
-    .WithLogger(logger)
+    .Use<IProductServiceClient>(host: new Uri("http://localhost:8080")
+    .WithLogging(logger)
     .Build();
 ```
