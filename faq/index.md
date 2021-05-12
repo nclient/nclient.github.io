@@ -7,9 +7,9 @@ You should write your own providers and use them. How to do this, see [here](/pr
 Yes, you can. See [this example](/examples/non-dot-net-service.md).
 
 ## I need authentication, how do I specify it when creating a client?
-You should pass `IAuthenticator` implementation 
-(see RestSharp [documentation](https://restsharp.dev/api/RestSharp.html#namespace-restsharp-authenticators)) 
-to `RestSharpHttpClientProvider`, and then use the provider instance to create the client (method `SetHttpClientProvider`).
+You should pass `HttpClientHandler` instance 
+(see Microsoft [documentation](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclienthandler)) 
+to `HttpClient`, and then use the provider instance to return the client (method `SetHttpClientProvider`).
 
 ## Why do I need resilience?
 This is well written in [the article](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/application-resiliency-patterns).
@@ -42,7 +42,7 @@ NClient is compatible with all versions that support .NET Standard 2.0 and .NET 
 The compatibility table can be viewed [here](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 
 ## What versions ASP.NET supported?
-Supported only ASP.NET Core.
+NClient supports only ASP.NET Core.
 
 ## I have another question, where do I ask it?
 You can create a [issue](https://github.com/nclient/NClient/issues) or ask a question in [discussions](https://github.com/nclient/NClient/discussions).
