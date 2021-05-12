@@ -3,12 +3,13 @@ To make your client resilient to failures, you should specify resilience provide
 By default, the provider that contains [Polly](https://github.com/App-vNext/Polly) library is used. So, you can create a policy using Polly library:
 
 ```ruby
-IAsyncPolicy policy = Policy
-    .Handle<Exception>()
+var policy = Policy
+    .HandleResult<HttpResponse>(x => !x.IsSuccessful)
+    .Or<Exception>()
     .WaitAndRetryAsync(maxRetryAttempts: 3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
-IProductServiceClient client = NClientProvider
-    .Use<IProductServiceClient>(host: "http://localhost:8080")
+IMyClient myClient = NClientProvider
+    .Use<IMyClient>(host: "http://localhost:8080")
     .WithResiliencePolicy(policy)
     .Build();
 ```
