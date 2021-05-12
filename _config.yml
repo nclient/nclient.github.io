@@ -1,6 +1,6 @@
 theme: jekyll-theme-cayman
 title: NClient
-description: Automatic type-safe .Net HTTP client that allows you to call web service API methods using annotated interfaces or controllers.
+description: Automatic type-safe .Net HTTP client that allows you to call web service API methods using annotated interfaces or controllers
 
 github:
   repository_url: https://github.com/nclient/NClient
