@@ -1,5 +1,5 @@
 # Client for ASP.NET service
-If you want to generate a client for a ASP.NET web service, then you need to extract an interface for your controller and annotate it with attributes from `NClient.Annotations`. They are very similar to attributes for ASP.NET controllers. Follow the steps below:
+If you want to generate a client for a ASP.NET web service, you need to extract an interface for your controller and annotate it with attributes from `NClient.Annotations`. They are very similar to attributes for ASP.NET controllers. Follow the steps below:
 #### Step 1: Install `NClient.AspNetCore` on server-side
 ```
 dotnet add package NClient.AspNetCore
@@ -15,7 +15,7 @@ public class WeatherForecastController : ControllerBase
 Note that you don't need to annotate it with ASP.NET attributes.
 #### Step 3: Extract interface for your controller
 ```ruby
-[Path("[controller]")]                                            // equivalent to [ApiController, Route("[controller]")]
+[Api, Path("[controller]")]                                       // equivalent to [ApiController, Route("[controller]")]
 public interface IWeatherForecastController
 {
     [GetMethod]                                                   // equivalent to [HttpGet]
@@ -32,7 +32,7 @@ public interface IWeatherForecastClient : IWeatherForecastController, INClient
 {
 }
 
-[Path("[controller]")]
+[Api, Path("[controller]")]
 public interface IWeatherForecastController
 {
     [GetMethod]
@@ -41,8 +41,8 @@ public interface IWeatherForecastController
 
 public class WeatherForecastController : ControllerBase, IWeatherForecastController { ... }
 ```
-This should be done if you want your client type to not contain "Сontroller" in the name. If you add `INClient` interface, you will get additional NClient features: receive a full http response and change a resilience policy for requests.
-#### Step 6: Add controller to ServiceCollection in Startup.cs
+This should be done if you want your client type not to contain "Сontroller" in the name. If you add `INClient` interface, you will get additional NClient features: receive a full http response and change a resilience policy for requests.
+#### Step 5: Add controller to ServiceCollection in Startup.cs
 ```ruby
 public void ConfigureServices(IServiceCollection services)
 {
@@ -51,18 +51,18 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 `AddNClientControllers` method can be used in combination with `AddControllers`.
-#### Step 7: Install `NClient` on client-side
+#### Step 6: Install `NClient` on client-side
 ```
 dotnet add package NClient
 ```
-#### Step 8: Create client
+#### Step 7: Create client
 ```ruby
 IWeatherForecastController client = NClientProvider
     .Use<IWeatherForecastController>(host: "http://localhost:8080")
     .Build();
 ```
-If you decide to follow the 4 step, use `IWeatherForecastClient` interface instead of `IWeatherForecastController`.
-#### Step 9: Send an http request
+If you decide to follow the 4th step, use `IWeatherForecastClient` interface instead of `IWeatherForecastController`.
+#### Step 8: Send an http request
 ```ruby
 // Equivalent to the following request: 
 // curl -X GET -H "Content-type: application/json" http://localhost:8080/WeatherForecast?date=2021-03-13T00:15Z
