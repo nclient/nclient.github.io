@@ -11,7 +11,7 @@ public interface IProductServiceClient : INClient
 }
 ```
 
-> :exclamation: Please note that the interface must inherit from `INClient` interface.  
+> If you add `INClient` interface, you will get additional NClient features: receive a full http response and change a resilience policy for requests (see [features](/features/index.md)).
 
 Now that you have an interface for the client, you can create a client:
 ```ruby
@@ -25,6 +25,7 @@ They are very similar to attributes for ASP.NET controllers. Below there is a ta
 
 | NClient.InterfaceProxy.Attributes | Microsoft.AspNetCore.Mvc |
 |:----------------------------------|:-------------------------|
+| ApiAttribute | ApiControllerAttribute |
 | PathAttribute | RouteAttribute |
 | GetMethodAttribute | HttpGetAttribute |
 | PostMethodAttribute | HttpPostAttribute |
@@ -40,9 +41,10 @@ NClient attributes have some limitations:
 
 #### Multiple attributes:
 ```ruby
-[GetMethod("weather"), GetMethod("weather/{date}")] // => NotSupportedNClientException
+[GetMethod("weather"), GetMethod("weather/{date}")]
 WeatherForecast GetAsync(DateTime date);
 ```
+Exception `NotSupportedNClientException` will be thrown.
 
 #### Multiple body parameters:
 ```ruby
